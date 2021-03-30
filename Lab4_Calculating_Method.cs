@@ -1,5 +1,5 @@
 using System;
-namespace CalculateMethod
+namespace SortApp
 {
     class Program
     {
@@ -17,14 +17,15 @@ namespace CalculateMethod
         }
 
         // Метод для красивого вывода промежуточных значений
-        static void prettyResultPrint(int numerator, int powerValue, int factorialValue, double result, int stepNumber)
+        static void prettyResultPrint(int numerator, int powerValue, int factorialValue, double result, double stepNumber, double x)
         {
+            double middleResult = numerator * Math.Pow(x, powerValue) / (factorial(factorialValue) * Math.Pow(3, powerValue));
             // Формируем строки для вывода результатов
             string numeratorString = $"Числитель: {numerator}";
             string powerValueString = $"Степень: {powerValue}";
             string factorialValueString = $"Факториал: {factorialValue}";
-            string middleResultString = $"Член последовательности: {numerator / (factorial(factorialValue) * Math.Pow(3, powerValue))}";
-            string resultString = $"Результат: {result}";
+            string middleResultString = String.Format("Член последовательности: {0:f5}", middleResult);
+            string resultString = String.Format("Результат: {0:f5}", result);
             
             // Выводим строки с одинаковым кол-вом отступов справа
             Console.WriteLine("".PadRight(60, '-'));
@@ -38,7 +39,7 @@ namespace CalculateMethod
         }
 
         // Метод для вычисления математической функции Math.Pow(1 + x, 1/3) с заданной точностью
-        static double calculateMathFunction(double x, double accuracy = 0.0001)
+        static double calculateMathFunction(double x, double accuracy = 0.00001)
         {
 
             // Переменная для хранения результата вычислений
@@ -59,20 +60,20 @@ namespace CalculateMethod
             bool switcher = false;
 
             // Пока очередной член вычислений больше заданной точности
-            while (numerator / (factorial(factorialValue) * Math.Pow(3, powerValue)) > accuracy)
+            while (numerator * Math.Pow(x, powerValue) / (factorial(factorialValue) * Math.Pow(3, powerValue)) > accuracy)
             {
 
                 // Если switcher == true - прибавляем, в другом случае отнимаем
                 if (switcher)
                 {
-                    result += numerator / (factorial(factorialValue) * Math.Pow(3, powerValue));
+                    result += numerator * Math.Pow(x, powerValue) / (factorial(factorialValue) * Math.Pow(3, powerValue));
                 } else
                 {
-                    result -= numerator / (factorial(factorialValue) * Math.Pow(3, powerValue));
+                    result -= numerator * Math.Pow(x, powerValue) / (factorial(factorialValue) * Math.Pow(3, powerValue));
                 }
 
                 // Функция для вывода промежуточных данных в хорошем виде
-                prettyResultPrint(numerator, powerValue, factorialValue, result, stepNumber);
+                prettyResultPrint(numerator, powerValue, factorialValue, result, stepNumber, x);
 
                 // Увеличиваем число факториала, степень и шаг на 1, число на которое умножается числитель на 3
                 factorialValue++;
@@ -97,7 +98,7 @@ namespace CalculateMethod
             double x = Convert.ToDouble(Console.ReadLine());
 
             // Вывод результата вычисления метода calculateMathFunction(x, [accuracy=0.0001])
-            Console.WriteLine($"Результат: {calculateMathFunction(x)}");
+            Console.WriteLine("Результат: {0:f5}", calculateMathFunction(x));
 
         }
     }
