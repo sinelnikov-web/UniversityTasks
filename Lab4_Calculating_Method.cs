@@ -24,8 +24,8 @@ namespace SortApp
             string numeratorString = $"Числитель: {numerator}";
             string powerValueString = $"Степень: {powerValue}";
             string factorialValueString = $"Факториал: {factorialValue}";
-            string middleResultString = String.Format("Член последовательности: {0:f5}", middleResult);
-            string resultString = String.Format("Результат: {0:f5}", result);
+            string middleResultString = String.Format("Член последовательности: {0:f4}", middleResult);
+            string resultString = String.Format("Результат: {0:f4}", result);
             
             // Выводим строки с одинаковым кол-вом отступов справа
             Console.WriteLine("".PadRight(60, '-'));
@@ -39,7 +39,7 @@ namespace SortApp
         }
 
         // Метод для вычисления математической функции Math.Pow(1 + x, 1/3) с заданной точностью
-        static double calculateMathFunction(double x, double accuracy = 0.00001)
+        static double calculateMathFunction(double x, double accuracy = 0.0001)
         {
 
             // Переменная для хранения результата вычислений
@@ -98,7 +98,7 @@ namespace SortApp
             double x = Convert.ToDouble(Console.ReadLine());
 
             // Вывод результата вычисления метода calculateMathFunction(x, [accuracy=0.0001])
-            Console.WriteLine("Результат: {0:f5}", calculateMathFunction(x));
+            Console.WriteLine("Результат: {0:f4}", calculateMathFunction(x));
 
         }
     }
